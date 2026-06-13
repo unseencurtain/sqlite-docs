@@ -1,0 +1,120 @@
+---
+title: "One-to-Many Relationships"
+---
+
+
+A one-to-many relationship is the most common relationship in relational databases.
+
+In a one-to-many relationship:
+
+- One row in the parent table can be related to many rows in another table.
+- Each row in the child table can be related to only one row in the parent table.
+
+## Example
+
+A customer can place many orders.
+
+### customers
+
+| customer_id | name |
+| ----------- | ---- |
+| 1 | Alice |
+| 2 | Bob |
+
+### orders
+
+| order_id | customer_id | total |
+| -------- | ----------- | ----- |
+| 101 | 1 | 50.00 |
+| 102 | 1 | 75.00 |
+| 103 | 2 | 25.00 |
+
+Customer Alice has two orders.
+
+## Creating the Tables
+
+```sql
+CREATE TABLE customers (
+    customer_id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+CREATE TABLE orders (
+    order_id INTEGER PRIMARY KEY,
+    customer_id INTEGER NOT NULL,
+    total DECIMAL(10,2),
+    FOREIGN KEY (customer_id)
+        REFERENCES customers(customer_id)
+);
+```
+
+## Understanding the Relationship
+
+The `customer_id` column in the `orders` table is a foreign key.
+
+Each order stores the ID of the customer who placed it.
+
+Because multiple rows in `orders` can contain the same `customer_id`, one customer can have many orders.
+
+## Inserting Data
+
+```sql
+INSERT INTO customers (customer_id, name)
+VALUES
+    (1, 'Alice'),
+    (2, 'Bob');
+```
+
+```sql
+INSERT INTO orders (order_id, customer_id, total)
+VALUES
+    (101, 1, 50.00),
+    (102, 1, 75.00),
+    (103, 2, 25.00);
+```
+
+## Querying Related Data
+
+```sql
+SELECT
+    customers.name,
+    orders.order_id,
+    orders.total
+FROM customers
+JOIN orders
+    ON customers.customer_id = orders.customer_id;
+```
+
+Result:
+
+| name | order_id | total |
+| ---- | -------- | ----- |
+| Alice | 101 | 50.00 |
+| Alice | 102 | 75.00 |
+| Bob | 103 | 25.00 |
+
+## Finding All Orders for One Customer
+
+```sql
+SELECT *
+FROM orders
+WHERE customer_id = 1;
+```
+
+## Parent and Child Tables
+
+In a one-to-many relationship:
+
+- The table being referenced is called the **parent table**.
+- The table containing the foreign key is called the **child table**.
+
+In this example:
+
+- `customers` is the parent table.
+- `orders` is the child table.
+
+## Summary
+
+A one-to-many relationship allows one row in a parent table to be associated with multiple rows in a child table.
+
+It is implemented using a foreign key in the child table that references the parent table.

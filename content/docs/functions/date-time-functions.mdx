@@ -1,0 +1,150 @@
+---
+title: "Date and Time Functions"
+---
+
+
+SQLite stores dates and times as text, integers, or real numbers.
+
+SQLite provides built-in functions for working with date and time values.
+
+## DATE()
+
+Returns a date value.
+
+```sql
+SELECT DATE('2025-01-15');
+```
+
+Result:
+
+```text
+2025-01-15
+```
+
+Get the current date:
+
+```sql
+SELECT DATE('now');
+```
+
+## TIME()
+
+Returns a time value.
+
+```sql
+SELECT TIME('now');
+```
+
+Example result:
+
+```text
+14:30:45
+```
+
+## DATETIME()
+
+Returns both date and time.
+
+```sql
+SELECT DATETIME('now');
+```
+
+Example result:
+
+```text
+2025-01-15 14:30:45
+```
+
+## STRFTIME()
+
+Formats date and time values.
+
+Get the year:
+
+```sql
+SELECT STRFTIME('%Y', '2025-01-15');
+```
+
+Result:
+
+```text
+2025
+```
+
+Get the month:
+
+```sql
+SELECT STRFTIME('%m', '2025-01-15');
+```
+
+Result:
+
+```text
+01
+```
+
+## Date Modifiers
+
+Add seven days:
+
+```sql
+SELECT DATE('2025-01-15', '+7 days');
+```
+
+Result:
+
+```text
+2025-01-22
+```
+
+Subtract one month:
+
+```sql
+SELECT DATE('2025-01-15', '-1 month');
+```
+
+Result:
+
+```text
+2024-12-15
+```
+
+## Difference Between Dates
+
+Using `JULIANDAY()`:
+
+```sql
+SELECT JULIANDAY('2025-01-15')
+     - JULIANDAY('2025-01-01');
+```
+
+Result:
+
+```text
+14
+```
+
+## Unix Timestamps
+
+Get the current Unix timestamp:
+
+```sql
+SELECT UNIXEPOCH();
+```
+
+Convert a Unix timestamp to a date:
+
+```sql
+SELECT DATETIME(1700000000, 'unixepoch');
+```
+
+## Summary
+
+| Function | Description |
+|----------|-------------|
+| `DATE()` | Returns a date |
+| `TIME()` | Returns a time |
+| `DATETIME()` | Returns date and time |
+| `STRFTIME()` | Formats dates and times |
+| `JULIANDAY()` | Returns Julian day number |
+| `UNIXEPOCH()` | Returns Unix timestamp |

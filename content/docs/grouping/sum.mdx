@@ -1,0 +1,60 @@
+---
+title: "SUM"
+---
+
+The `SUM()` function returns the total of all non-NULL values in a column.
+
+## Syntax
+
+```sql
+SUM(expression)
+```
+
+## Example
+
+```sql
+SELECT SUM(amount)
+FROM orders;
+```
+
+Result:
+
+| SUM(amount) |
+|------------|
+| 250 |
+
+The values are added together.
+
+## Using SUM with GROUP BY
+
+```sql
+SELECT customer, SUM(amount) AS total_amount
+FROM orders
+GROUP BY customer;
+```
+
+Result:
+
+| customer | total_amount |
+|----------|-------------|
+| Alice | 175 |
+| Bob | 75 |
+
+Each group's values are summed separately.
+
+## SUM and NULL Values
+
+`NULL` values are ignored.
+
+```sql
+SELECT SUM(score)
+FROM results;
+```
+
+Only non-NULL scores contribute to the total.
+
+## Notes
+
+- `SUM()` ignores `NULL` values.
+- Often used with `GROUP BY`.
+- Returns the total of numeric values.

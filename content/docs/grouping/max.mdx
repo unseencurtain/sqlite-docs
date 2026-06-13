@@ -1,0 +1,54 @@
+---
+title: "MAX"
+---
+
+The `MAX()` function returns the largest value in a set.
+
+## Syntax
+
+```sql
+MAX(expression)
+```
+
+## Example
+
+```sql
+SELECT MAX(amount)
+FROM orders;
+```
+
+Result:
+
+| MAX(amount) |
+|------------|
+| 100 |
+
+## Using MAX with GROUP BY
+
+```sql
+SELECT customer, MAX(amount) AS largest_order
+FROM orders
+GROUP BY customer;
+```
+
+Result:
+
+| customer | largest_order |
+|----------|--------------|
+| Alice | 100 |
+| Bob | 50 |
+
+## MAX with Text Values
+
+```sql
+SELECT MAX(name)
+FROM users;
+```
+
+The alphabetically largest value is returned.
+
+## Notes
+
+- Works with numbers, text, and dates.
+- Ignores `NULL` values.
+- Frequently used with `GROUP BY`.

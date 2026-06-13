@@ -1,0 +1,161 @@
+---
+title: "Storage Classes"
+---
+
+SQLite uses **storage classes** to represent the type of a value stored in the database.
+
+Unlike many database systems, SQLite does not strictly enforce data types on columns. Instead, the type is associated with the value itself.
+
+## The Five Storage Classes
+
+Every value in SQLite belongs to one of these storage classes:
+
+| Storage Class | Description |
+|--------------|-------------|
+| NULL | Represents a missing or unknown value. |
+| INTEGER | Signed integer values. |
+| REAL | Floating-point numbers. |
+| TEXT | Text strings stored using UTF-8, UTF-16BE, or UTF-16LE encoding. |
+| BLOB | Raw binary data stored exactly as provided. |
+
+## INTEGER
+
+INTEGER values represent whole numbers.
+
+```sql
+SELECT 42;
+SELECT -100;
+SELECT 9000000;
+```
+
+Examples:
+
+```sql
+CREATE TABLE users (
+  id INTEGER
+);
+```
+
+## REAL
+
+REAL values represent floating-point numbers.
+
+```sql
+SELECT 3.14;
+SELECT -0.5;
+SELECT 1.2e10;
+```
+
+Examples:
+
+```sql
+CREATE TABLE products (
+  price REAL
+);
+```
+
+## TEXT
+
+TEXT values store character data.
+
+```sql
+SELECT 'Hello';
+SELECT 'SQLite';
+```
+
+Examples:
+
+```sql
+CREATE TABLE users (
+  name TEXT
+);
+```
+
+SQLite uses single quotes for string literals.
+
+```sql
+INSERT INTO users (name)
+VALUES ('Alice');
+```
+
+## BLOB
+
+BLOB values store binary data exactly as supplied.
+
+A blob literal uses hexadecimal notation.
+
+```sql
+SELECT X'48656C6C6F';
+```
+
+Examples:
+
+```sql
+CREATE TABLE files (
+  content BLOB
+);
+```
+
+## NULL
+
+NULL represents the absence of a value.
+
+```sql
+SELECT NULL;
+```
+
+Examples:
+
+```sql
+INSERT INTO users (name)
+VALUES (NULL);
+```
+
+## Storage Classes and Columns
+
+Even if a column is declared with a specific type, SQLite stores values using one of the five storage classes.
+
+```sql
+CREATE TABLE demo (
+  value INTEGER
+);
+
+INSERT INTO demo (value)
+VALUES ('hello');
+```
+
+SQLite may allow values whose storage class differs from the declared column type depending on the column's type affinity.
+
+## Checking a Value's Storage Class
+
+Use the `typeof()` function to determine the storage class of a value.
+
+```sql
+SELECT typeof(42);
+```
+
+Result:
+
+```text
+integer
+```
+
+More examples:
+
+```sql
+SELECT typeof(3.14);
+SELECT typeof('hello');
+SELECT typeof(NULL);
+```
+
+## Summary
+
+SQLite has five storage classes:
+
+- NULL
+- INTEGER
+- REAL
+- TEXT
+- BLOB
+
+Storage classes describe the type of a value stored in the database and form the foundation of SQLite's flexible typing system.

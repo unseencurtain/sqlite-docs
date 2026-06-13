@@ -1,0 +1,4 @@
+{
+  "title": "Grouping & Aggregation",
+  "pages": ["group-by", "having", "count", "sum", "avg", "min", "max"]
+}

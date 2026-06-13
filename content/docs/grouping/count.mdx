@@ -1,0 +1,79 @@
+---
+title: "COUNT"
+---
+
+The `COUNT()` function returns the number of rows or values in a result set.
+
+## Syntax
+
+Count all rows:
+
+```sql
+COUNT(*)
+```
+
+Count non-NULL values:
+
+```sql
+COUNT(column_name)
+```
+
+## Count All Rows
+
+```sql
+SELECT COUNT(*)
+FROM orders;
+```
+
+Result:
+
+| COUNT(*) |
+|-----------|
+| 4 |
+
+Every row is counted.
+
+## Count Non-NULL Values
+
+```sql
+SELECT COUNT(email)
+FROM users;
+```
+
+Only rows where `email` is not `NULL` are counted.
+
+## Count Distinct Values
+
+```sql
+SELECT COUNT(DISTINCT customer)
+FROM orders;
+```
+
+Result:
+
+| COUNT(DISTINCT customer) |
+|-------------------------|
+| 2 |
+
+Duplicate values are counted only once.
+
+## Using COUNT with GROUP BY
+
+```sql
+SELECT customer, COUNT(*) AS order_count
+FROM orders
+GROUP BY customer;
+```
+
+Result:
+
+| customer | order_count |
+|----------|------------|
+| Alice | 2 |
+| Bob | 2 |
+
+## Notes
+
+- `COUNT(*)` counts rows.
+- `COUNT(column)` counts non-NULL values.
+- `COUNT(DISTINCT column)` counts unique non-NULL values.

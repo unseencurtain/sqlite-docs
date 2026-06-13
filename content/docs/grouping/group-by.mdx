@@ -1,0 +1,59 @@
+---
+title: "GROUP BY"
+---
+
+The `GROUP BY` clause groups rows that have the same values in one or more columns into a single group.
+
+It is commonly used together with aggregate functions such as `COUNT()`, `SUM()`, `AVG()`, `MIN()`, and `MAX()`.
+
+## Syntax
+
+```sql
+SELECT column1, aggregate_function(column2)
+FROM table_name
+GROUP BY column1;
+```
+
+## Example
+
+Suppose the `orders` table contains the following data:
+
+| customer | amount |
+|----------|---------|
+| Alice | 100 |
+| Bob | 50 |
+| Alice | 75 |
+| Bob | 25 |
+
+Query:
+
+```sql
+SELECT customer, SUM(amount) AS total_amount
+FROM orders
+GROUP BY customer;
+```
+
+Result:
+
+| customer | total_amount |
+|----------|-------------|
+| Alice | 175 |
+| Bob | 75 |
+
+## Grouping by Multiple Columns
+
+You can group by more than one column.
+
+```sql
+SELECT department, role, COUNT(*) AS employees
+FROM staff
+GROUP BY department, role;
+```
+
+Rows are grouped based on the unique combination of both columns.
+
+## Notes
+
+- Every selected column that is not part of an aggregate function should normally appear in the `GROUP BY` clause.
+- `GROUP BY` is evaluated before `HAVING`.
+- Aggregate functions operate on each group instead of individual rows.

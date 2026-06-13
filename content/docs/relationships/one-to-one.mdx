@@ -1,0 +1,115 @@
+---
+title: "One-to-One Relationships"
+---
+
+
+A one-to-one relationship exists when a row in one table is related to exactly one row in another table.
+
+This type of relationship is less common than one-to-many relationships, but it is useful when:
+
+- Splitting sensitive data into a separate table
+- Storing optional information
+- Organizing large tables into smaller logical sections
+
+## Example
+
+Suppose every user can have only one profile.
+
+### users
+
+| user_id | username |
+| -------- | -------- |
+| 1 | alice |
+| 2 | bob |
+
+### profiles
+
+| profile_id | user_id | bio |
+| ---------- | ------- | --- |
+| 1 | 1 | Loves SQL |
+| 2 | 2 | Database enthusiast |
+
+## Creating the Tables
+
+```sql
+CREATE TABLE users (
+    user_id INTEGER PRIMARY KEY,
+    username TEXT NOT NULL
+);
+
+CREATE TABLE profiles (
+    profile_id INTEGER PRIMARY KEY,
+    user_id INTEGER UNIQUE,
+    bio TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+```
+
+## Why UNIQUE Matters
+
+The `FOREIGN KEY` ensures that every profile references a valid user.
+
+The `UNIQUE` constraint ensures that a user can appear only once in the `profiles` table.
+
+Without `UNIQUE`, a user could have multiple profiles, turning the relationship into one-to-many.
+
+## Inserting Data
+
+```sql
+INSERT INTO users (user_id, username)
+VALUES
+    (1, 'alice'),
+    (2, 'bob');
+
+INSERT INTO profiles (profile_id, user_id, bio)
+VALUES
+    (1, 1, 'Loves SQL');
+```
+
+Attempting to insert another profile for the same user would fail:
+
+```sql
+INSERT INTO profiles (profile_id, user_id, bio)
+VALUES
+    (2, 1, 'Another profile');
+```
+
+## Querying Related Data
+
+```sql
+SELECT
+    users.username,
+    profiles.bio
+FROM users
+JOIN profiles
+    ON users.user_id = profiles.user_id;
+```
+
+Result:
+
+| username | bio |
+| -------- | --- |
+| alice | Loves SQL |
+
+## Alternative Design
+
+A one-to-one relationship can also be enforced by making the foreign key the primary key.
+
+```sql
+CREATE TABLE profiles (
+    user_id INTEGER PRIMARY KEY,
+    bio TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+```
+
+Because primary keys must be unique, each user can have only one profile.
+
+## Summary
+
+A one-to-one relationship means one row in a table matches exactly one row in another table.
+
+It is typically implemented using:
+
+- A `FOREIGN KEY`
+- A `UNIQUE` constraint or shared primary key

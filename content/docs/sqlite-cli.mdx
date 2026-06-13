@@ -1,0 +1,264 @@
+---
+title: SQLite CLI
+description: Learn how to use the SQLite Command Line Interface (CLI) to create, manage, and query databases.
+---
+
+
+
+The SQLite Command Line Interface (CLI) is a terminal-based tool for interacting with SQLite databases. It allows you to create databases, run SQL queries, inspect tables, and manage data without writing an application.
+
+## Overview
+
+The SQLite CLI executable is typically named:
+
+```bash
+sqlite3
+```
+
+You can use it to:
+
+* Create databases
+* Open existing databases
+* Execute SQL statements
+* Import and export data
+* Inspect database structure
+
+## Starting SQLite
+
+Create a new database or open an existing one:
+
+```bash
+sqlite3 mydatabase.db
+```
+
+If the file does not exist, SQLite creates it automatically.
+
+You will see a prompt similar to:
+
+```text
+SQLite version 3.x.x
+sqlite>
+```
+
+## Running SQL Commands
+
+Create a table:
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    email TEXT
+);
+```
+
+Insert data:
+
+```sql
+INSERT INTO users (name, email)
+VALUES ('John Doe', 'john@example.com');
+```
+
+Query data:
+
+```sql
+SELECT * FROM users;
+```
+
+Output:
+
+```text
+1|John Doe|john@example.com
+```
+
+## SQLite Meta Commands
+
+Commands that begin with a dot (`.`) are CLI commands, not SQL statements.
+
+### List Tables
+
+```bash
+.tables
+```
+
+Example output:
+
+```text
+users
+orders
+products
+```
+
+### Show Database Schema
+
+```bash
+.schema
+```
+
+### Show Schema for a Specific Table
+
+```bash
+.schema users
+```
+
+### List Databases
+
+```bash
+.databases
+```
+
+Example:
+
+```text
+main: /home/user/mydatabase.db
+```
+
+### Show Help
+
+```bash
+.help
+```
+
+Displays all available CLI commands.
+
+## Changing Output Format
+
+### Column Mode
+
+```bash
+.mode column
+.headers on
+```
+
+Example output:
+
+```text
+id  name       email
+--  ---------  ----------------
+1   John Doe   john@example.com
+```
+
+### CSV Mode
+
+```bash
+.mode csv
+```
+
+Useful when exporting data.
+
+## Reading SQL from a File
+
+Execute commands stored in a file:
+
+```bash
+.read setup.sql
+```
+
+Example file:
+
+```sql
+CREATE TABLE products (
+    id INTEGER PRIMARY KEY,
+    name TEXT
+);
+```
+
+## Exporting Data
+
+Export query results:
+
+```bash
+.output users.txt
+SELECT * FROM users;
+.output stdout
+```
+
+Export entire database:
+
+```bash
+.dump
+```
+
+Save dump to a file:
+
+```bash
+.output backup.sql
+.dump
+.output stdout
+```
+
+## Importing Data
+
+Import a SQL dump:
+
+```bash
+.read backup.sql
+```
+
+Import CSV data:
+
+```bash
+.mode csv
+.import users.csv users
+```
+
+## Exiting SQLite
+
+Exit the CLI:
+
+```bash
+.quit
+```
+
+Or:
+
+```bash
+.exit
+```
+
+## Useful CLI Commands
+
+| Command          | Description             |
+| ---------------- | ----------------------- |
+| `.help`          | Show available commands |
+| `.tables`        | List tables             |
+| `.schema`        | Show schema             |
+| `.databases`     | List databases          |
+| `.dump`          | Export database         |
+| `.read file.sql` | Execute SQL file        |
+| `.import`        | Import CSV data         |
+| `.quit`          | Exit SQLite             |
+
+## Common Mistakes
+
+### Forgetting Semicolons
+
+SQL statements must end with a semicolon:
+
+```sql
+SELECT * FROM users;
+```
+
+### Confusing SQL and Meta Commands
+
+Correct:
+
+```bash
+.tables
+```
+
+Incorrect:
+
+```sql
+.tables;
+```
+
+Meta commands are not SQL statements.
+
+## Summary
+
+The SQLite CLI is a powerful tool for creating databases, executing queries, managing schemas, and importing or exporting data. Learning a few essential commands makes database development much faster.
+
+## Next Steps
+
+Continue to **Creating a Database** to learn how SQLite databases are created and organized.

@@ -1,0 +1,74 @@
+---
+title: "Deleting a Database"
+---
+
+
+The `DELETE` statement removes rows from a table.
+
+## Delete a Single Row
+
+```sql
+DELETE FROM users
+WHERE id = 1;
+```
+
+## Delete Multiple Rows
+
+```sql
+DELETE FROM users
+WHERE active = 0;
+```
+
+All matching rows are removed.
+
+## Delete All Rows
+
+```sql
+DELETE FROM users;
+```
+
+The table remains, but all rows are removed.
+
+## Verify Before Deleting
+
+Run a `SELECT` query first to confirm which rows will be affected.
+
+```sql
+SELECT *
+FROM users
+WHERE active = 0;
+```
+
+## Common Mistake
+
+```sql
+DELETE FROM users;
+```
+
+Without a `WHERE` clause, every row in the table is deleted.
+
+## DELETE vs DROP
+
+### Delete Rows
+
+```sql
+DELETE FROM users;
+```
+
+The table still exists.
+
+### Delete the Entire Table
+
+```sql
+DROP TABLE users;
+```
+
+The table structure and all of its data are removed.
+
+## Summary
+
+- Use `DELETE` to remove rows.
+- Use `WHERE` to target specific rows.
+- Omitting `WHERE` removes all rows.
+- `DROP TABLE` removes the table itself.
+- Verify affected rows before deleting data.

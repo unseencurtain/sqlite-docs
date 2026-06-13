@@ -1,0 +1,77 @@
+---
+title: "WHERE Clause"
+---
+
+
+The `WHERE` clause is used to filter rows returned by a query. Only rows that satisfy the specified condition are included in the result set.
+
+## Syntax
+
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE condition;
+```
+
+## Example
+
+Return all customers from Bangladesh:
+
+```sql
+SELECT *
+FROM customers
+WHERE country = 'Bangladesh';
+```
+
+## Using Multiple Conditions
+
+You can combine conditions using logical operators.
+
+```sql
+SELECT *
+FROM customers
+WHERE country = 'Bangladesh'
+  AND active = 1;
+```
+
+## Comparison Examples
+
+```sql
+SELECT *
+FROM products
+WHERE price > 100;
+```
+
+```sql
+SELECT *
+FROM employees
+WHERE department = 'Sales';
+```
+
+```sql
+SELECT *
+FROM orders
+WHERE order_date >= '2025-01-01';
+```
+
+## NULL Values
+
+To check for `NULL`, use `IS NULL` or `IS NOT NULL`.
+
+```sql
+SELECT *
+FROM customers
+WHERE email IS NULL;
+```
+
+```sql
+SELECT *
+FROM customers
+WHERE email IS NOT NULL;
+```
+
+## Key Points
+
+- `WHERE` filters rows before they are returned.
+- Conditions can use comparison and logical operators.
+- Use `IS NULL` and `IS NOT NULL` when working with `NULL` values.

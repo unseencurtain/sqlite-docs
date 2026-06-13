@@ -1,0 +1,73 @@
+---
+title: "UNIQUE"
+---
+
+The **UNIQUE** constraint ensures that values in a column or group of columns do not repeat.
+
+Unlike a primary key, a table can contain multiple unique constraints.
+
+## Single-Column UNIQUE Constraint
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    email TEXT UNIQUE
+);
+```
+
+Every email address must be different.
+
+## Valid Inserts
+
+```sql
+INSERT INTO users (email)
+VALUES ('alice@example.com');
+
+INSERT INTO users (email)
+VALUES ('bob@example.com');
+```
+
+## Invalid Insert
+
+```sql
+INSERT INTO users (email)
+VALUES ('alice@example.com');
+```
+
+This fails because the value already exists.
+
+## Composite UNIQUE Constraints
+
+```sql
+CREATE TABLE enrollments (
+    student_id INTEGER,
+    course_id INTEGER,
+    UNIQUE (student_id, course_id)
+);
+```
+
+The combination must be unique.
+
+## UNIQUE and NULL Values
+
+SQLite allows multiple `NULL` values in a unique column.
+
+```sql
+CREATE TABLE contacts (
+    email TEXT UNIQUE
+);
+```
+
+The following is valid:
+
+```sql
+INSERT INTO contacts (email) VALUES (NULL);
+INSERT INTO contacts (email) VALUES (NULL);
+```
+
+## Summary
+
+- `UNIQUE` prevents duplicate values.
+- Can be applied to one or more columns.
+- Multiple unique constraints can exist in a table.
+- SQLite allows multiple `NULL` values in unique columns.

@@ -1,0 +1,71 @@
+---
+title: "Updating Data"
+---
+
+The `UPDATE` statement modifies existing rows in a table.
+
+## Update a Single Column
+
+```sql
+UPDATE users
+SET name = 'Alice Smith'
+WHERE id = 1;
+```
+
+## Update Multiple Columns
+
+```sql
+UPDATE users
+SET
+  name = 'Alice Smith',
+  email = 'alice.smith@example.com'
+WHERE id = 1;
+```
+
+## Update Multiple Rows
+
+```sql
+UPDATE users
+SET active = 0
+WHERE last_login < '2025-01-01';
+```
+
+Every row matching the condition will be updated.
+
+## Update Using Expressions
+
+```sql
+UPDATE products
+SET price = price * 1.10;
+```
+
+This increases every price by 10%.
+
+## Important: Use WHERE Carefully
+
+```sql
+UPDATE users
+SET active = 0;
+```
+
+Without a `WHERE` clause, every row in the table is updated.
+
+## Verify Before Updating
+
+It is often helpful to run a `SELECT` query first.
+
+```sql
+SELECT *
+FROM users
+WHERE id = 1;
+```
+
+Then execute the update.
+
+## Summary
+
+- Use `UPDATE` to modify existing rows.
+- `SET` specifies new values.
+- `WHERE` determines which rows are affected.
+- Omitting `WHERE` updates all rows.
+- Expressions can be used when updating values.

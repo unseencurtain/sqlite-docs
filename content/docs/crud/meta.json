@@ -1,0 +1,4 @@
+{
+  "title": "CRUD Operations",
+  "pages": ["insert", "select", "update", "delete"]
+}

@@ -1,0 +1,112 @@
+---
+title: "Aggregate Functions"
+---
+
+
+Aggregate functions perform calculations across multiple rows and return a single result.
+
+These functions are commonly used with `SELECT`, `GROUP BY`, and `HAVING`.
+
+## COUNT()
+
+Returns the number of rows.
+
+```sql
+SELECT COUNT(*)
+FROM customers;
+```
+
+Count non-NULL values in a column:
+
+```sql
+SELECT COUNT(email)
+FROM customers;
+```
+
+## SUM()
+
+Returns the total of all values.
+
+```sql
+SELECT SUM(price)
+FROM products;
+```
+
+## AVG()
+
+Returns the average value.
+
+```sql
+SELECT AVG(price)
+FROM products;
+```
+
+## MIN()
+
+Returns the smallest value.
+
+```sql
+SELECT MIN(price)
+FROM products;
+```
+
+## MAX()
+
+Returns the largest value.
+
+```sql
+SELECT MAX(price)
+FROM products;
+```
+
+## Using Aggregate Functions with GROUP BY
+
+Calculate totals for each category:
+
+```sql
+SELECT category,
+       COUNT(*) AS total_products,
+       AVG(price) AS average_price
+FROM products
+GROUP BY category;
+```
+
+Result:
+
+| category | total_products | average_price |
+|----------|---------------|---------------|
+| Books | 12 | 14.99 |
+| Games | 8 | 39.50 |
+
+## Using HAVING
+
+Filter grouped results:
+
+```sql
+SELECT category,
+       COUNT(*) AS total_products
+FROM products
+GROUP BY category
+HAVING COUNT(*) > 5;
+```
+
+## Aggregate Functions Ignore NULL
+
+Most aggregate functions ignore `NULL` values.
+
+```sql
+SELECT AVG(discount)
+FROM products;
+```
+
+Rows where `discount` is `NULL` are not included in the calculation.
+
+## Summary
+
+| Function | Description |
+|-----------|-------------|
+| `COUNT()` | Counts rows or values |
+| `SUM()` | Calculates total |
+| `AVG()` | Calculates average |
+| `MIN()` | Returns smallest value |
+| `MAX()` | Returns largest value |

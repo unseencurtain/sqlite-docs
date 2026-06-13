@@ -1,0 +1,9 @@
+{
+  "title": "Database Basics",
+  "pages": [
+    "creating-a-database",
+    "opening-a-database",
+    "database-files",
+    "deleting-a-database"
+  ]
+}

@@ -1,0 +1,91 @@
+---
+title: "Database Files"
+---
+
+SQLite stores an entire database inside a file on disk.
+
+Tables, indexes, views, triggers, and data are all stored within this file.
+
+## Single-File Architecture
+
+Most database systems require separate server software and multiple storage files.
+
+SQLite uses a simpler design:
+
+```text
+my_database.db
+```
+
+This single file contains:
+
+* Database schema
+* Table data
+* Indexes
+* Metadata
+
+Because everything is stored together, databases are easy to copy, move, back up, and share.
+
+## Common File Extensions
+
+SQLite does not require a specific extension.
+
+Common examples include:
+
+```text
+database.db
+database.sqlite
+database.sqlite3
+app_data.db
+```
+
+The extension is a naming convention only.
+
+## Internal Structure
+
+Although a SQLite database appears as a single file, internally it is organized into pages.
+
+SQLite manages:
+
+* Tables
+* Indexes
+* Row storage
+* Transactions
+
+The exact format is handled automatically by SQLite and should not be modified directly.
+
+## Temporary and Journal Files
+
+During transactions, SQLite may create temporary files to ensure data integrity.
+
+Examples include:
+
+```text
+database.db-journal
+database.db-wal
+database.db-shm
+```
+
+These files help SQLite recover safely from crashes or interrupted writes.
+
+## Backing Up a Database
+
+Since a SQLite database is a file, backups are straightforward.
+
+A common SQL-based approach is:
+
+```sql
+VACUUM INTO 'backup.db';
+```
+
+This creates a consistent backup database file.
+
+## Summary
+
+SQLite databases are stored as files that contain:
+
+* Schema definitions
+* Application data
+* Indexes
+* Internal metadata
+
+The file-based design is one of SQLite's defining features and a major reason for its portability.

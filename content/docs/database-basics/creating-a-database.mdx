@@ -1,0 +1,79 @@
+---
+title: "Creating a Database"
+---
+
+In SQLite, a database is stored inside a single file. Unlike many database systems, you do not need a separate server process or a database administrator to create one.
+
+A database is created automatically when SQLite opens a database file that does not already exist.
+
+## Creating Tables
+
+A newly created database is empty. To store data, you create tables using SQL.
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username TEXT NOT NULL,
+    email TEXT UNIQUE,
+    created_at TEXT
+);
+```
+
+This statement creates a table named `users` with four columns.
+
+## Creating Additional Objects
+
+SQLite databases can contain more than tables. Common database objects include:
+
+### Indexes
+
+Indexes improve query performance.
+
+```sql
+CREATE INDEX idx_users_username
+ON users(username);
+```
+
+### Views
+
+Views store reusable queries.
+
+```sql
+CREATE VIEW active_users AS
+SELECT id, username
+FROM users;
+```
+
+### Triggers
+
+Triggers automatically execute SQL when certain events occur.
+
+```sql
+CREATE TRIGGER user_created
+AFTER INSERT ON users
+BEGIN
+    SELECT 'User created';
+END;
+```
+
+## Verifying Database Contents
+
+You can inspect the database schema using SQLite system tables.
+
+```sql
+SELECT name, type
+FROM sqlite_master;
+```
+
+This query lists tables, indexes, views, and triggers stored in the database.
+
+## Summary
+
+Creating a SQLite database is simple:
+
+1. Create or open a database file.
+2. Create tables using `CREATE TABLE`.
+3. Add indexes, views, or triggers as needed.
+4. Verify the schema using `sqlite_master`.
+
+Once these objects exist, the database is ready to store and query data.

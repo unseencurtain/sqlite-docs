@@ -1,0 +1,110 @@
+---
+title: "Selecting Data"
+---
+
+The `SELECT` statement retrieves data from one or more tables.
+
+## Select All Columns
+
+```sql
+SELECT *
+FROM users;
+```
+
+## Select Specific Columns
+
+```sql
+SELECT name, email
+FROM users;
+```
+
+## Filter Rows
+
+Use `WHERE` to return only matching rows.
+
+```sql
+SELECT *
+FROM users
+WHERE name = 'Alice';
+```
+
+## Sort Results
+
+### Ascending Order
+
+```sql
+SELECT *
+FROM users
+ORDER BY name ASC;
+```
+
+### Descending Order
+
+```sql
+SELECT *
+FROM users
+ORDER BY name DESC;
+```
+
+## Limit Results
+
+```sql
+SELECT *
+FROM users
+LIMIT 5;
+```
+
+## Skip Rows With OFFSET
+
+```sql
+SELECT *
+FROM users
+LIMIT 5 OFFSET 10;
+```
+
+## Remove Duplicate Values
+
+```sql
+SELECT DISTINCT country
+FROM users;
+```
+
+## Aggregate Functions
+
+### Count Rows
+
+```sql
+SELECT COUNT(*)
+FROM users;
+```
+
+### Calculate an Average
+
+```sql
+SELECT AVG(age)
+FROM users;
+```
+
+### Find Minimum and Maximum Values
+
+```sql
+SELECT MIN(age), MAX(age)
+FROM users;
+```
+
+## Combining Conditions
+
+```sql
+SELECT *
+FROM users
+WHERE age >= 18
+  AND country = 'Bangladesh';
+```
+
+## Summary
+
+- `SELECT` retrieves data from tables.
+- Use `WHERE` to filter rows.
+- Use `ORDER BY` to sort results.
+- Use `LIMIT` and `OFFSET` to control result size.
+- Aggregate functions summarize data.

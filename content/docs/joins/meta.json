@@ -1,0 +1,4 @@
+{
+  "title": "Joins",
+  "pages": ["inner-join", "left-join", "cross-join", "self-join"]
+}

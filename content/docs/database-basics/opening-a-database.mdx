@@ -1,0 +1,82 @@
+---
+title: "Opening a Database"
+---
+ 
+
+Opening a database means connecting to an existing SQLite database file so that SQL statements can be executed against it.
+
+SQLite works directly with database files. When a database is opened, SQLite reads the file and prepares it for queries and modifications.
+
+## Working With an Existing Database
+
+Once a database is open, SQL statements can be executed normally.
+
+```sql
+SELECT *
+FROM users;
+```
+
+You can also modify data:
+
+```sql
+INSERT INTO users (username, email)
+VALUES ('alice', 'alice@example.com');
+```
+
+## Checking the Database Schema
+
+To see what objects exist in the database:
+
+```sql
+SELECT name, type
+FROM sqlite_master
+ORDER BY type, name;
+```
+
+Example output:
+
+| name               | type  |
+| ------------------ | ----- |
+| users              | table |
+| idx_users_username | index |
+| active_users       | view  |
+
+## Understanding Connections
+
+A connection represents an active session with a database file.
+
+During a connection, you can:
+
+* Execute SQL statements
+* Read data
+* Insert, update, and delete records
+* Manage transactions
+
+Example transaction:
+
+```sql
+BEGIN TRANSACTION;
+
+UPDATE users
+SET username = 'new_name'
+WHERE id = 1;
+
+COMMIT;
+```
+
+## Opening a Missing Database
+
+If the specified database file does not exist, SQLite typically creates a new empty database instead.
+
+For this reason, always verify that you are working with the intended database file.
+
+## Summary
+
+Opening a database allows SQLite to:
+
+* Read existing data
+* Execute SQL statements
+* Modify database contents
+* Manage transactions
+
+Once opened, the database remains available until the connection is closed.

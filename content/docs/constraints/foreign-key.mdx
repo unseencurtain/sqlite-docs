@@ -1,0 +1,85 @@
+---
+title: "Foreign Key"
+---
+
+A **FOREIGN KEY** creates a relationship between tables.
+
+It ensures that values in one table correspond to valid rows in another table.
+
+## Creating Related Tables
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username TEXT
+);
+
+CREATE TABLE posts (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    FOREIGN KEY (user_id)
+        REFERENCES users(id)
+);
+```
+
+The `user_id` value must reference an existing user.
+
+## Valid Insert
+
+```sql
+INSERT INTO users (id, username)
+VALUES (1, 'alice');
+
+INSERT INTO posts (user_id)
+VALUES (1);
+```
+
+## Invalid Insert
+
+```sql
+INSERT INTO posts (user_id)
+VALUES (99);
+```
+
+This fails if no user with ID `99` exists.
+
+## Enabling Foreign Key Enforcement
+
+Foreign key enforcement is disabled by default for each new SQLite connection.
+
+```sql
+PRAGMA foreign_keys = ON;
+```
+
+Run this before executing statements that rely on foreign keys.
+
+## ON DELETE CASCADE
+
+```sql
+CREATE TABLE posts (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    FOREIGN KEY (user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+);
+```
+
+Deleting a user automatically deletes related posts.
+
+## Other Actions
+
+```sql
+ON DELETE SET NULL
+ON UPDATE CASCADE
+ON DELETE RESTRICT
+```
+
+These control how changes to parent rows affect related rows.
+
+## Summary
+
+- Foreign keys create relationships between tables.
+- Referenced rows must exist.
+- Foreign key enforcement must be enabled.
+- Actions such as `CASCADE` and `SET NULL` control related row behavior.

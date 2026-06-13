@@ -1,0 +1,49 @@
+---
+title: What is SQLite?
+description: Learn what SQLite is, how it works, and why it is one of the most widely used databases.
+---
+
+SQLite is a lightweight, serverless, self-contained relational database management system (RDBMS).
+
+Unlike traditional databases such as MySQL or PostgreSQL, SQLite does not require a separate database server. The entire database is stored in a single file on disk.
+
+## Key Features
+
+- Serverless architecture
+- Zero configuration
+- Cross-platform support
+- ACID-compliant transactions
+- Small footprint
+- Open source
+
+## How SQLite Works
+
+Applications communicate directly with the SQLite library. Queries are executed against a database file without requiring a database server process.
+
+```sql
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY,
+  name TEXT
+);
+```
+
+## Common Use Cases
+
+- Mobile applications
+- Desktop applications
+- Embedded systems
+- Testing and development
+- Small to medium-sized websites
+
+## Advantages
+
+| Feature | Benefit |
+|----------|----------|
+| Single File | Easy backup and deployment |
+| Serverless | No setup required |
+| Lightweight | Low resource usage |
+| Reliable | ACID transactions |
+
+## Next Steps
+
+Continue to the Architecture section to understand how SQLite is structured internally.

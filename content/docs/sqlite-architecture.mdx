@@ -1,0 +1,173 @@
+---
+title: "SQLite Architecture"
+description: "Understand how SQLite is structured internally and how it processes data."
+---
+
+
+SQLite has a simple and lightweight architecture compared to traditional database systems. Instead of running as a separate server process, SQLite is embedded directly into an application.
+
+## Overview
+
+Most database systems follow a client-server model:
+
+```text
+Application → Database Server → Database Files
+```
+
+SQLite works differently:
+
+```text
+Application → SQLite Library → Database File
+```
+
+The application communicates directly with the SQLite library, which reads and writes data to a database file.
+
+## Main Components
+
+### SQLite Library
+
+The SQLite library is the core engine responsible for:
+
+* Parsing SQL statements
+* Managing transactions
+* Reading and writing data
+* Optimizing queries
+* Enforcing constraints
+
+### Query Processor
+
+The query processor analyzes SQL statements and determines the most efficient way to execute them.
+
+Example:
+
+```sql
+SELECT * FROM users WHERE id = 1;
+```
+
+SQLite converts this SQL statement into operations that retrieve the requested data.
+
+### Storage Engine
+
+The storage engine manages:
+
+* Database pages
+* Indexes
+* Tables
+* Data retrieval
+* Data persistence
+
+All information is stored inside a single database file.
+
+### Database File
+
+Unlike server-based databases, SQLite stores the entire database in a single file.
+
+Example:
+
+```text
+app.db
+```
+
+This file contains:
+
+* Tables
+* Indexes
+* Views
+* Triggers
+* Data
+
+## SQLite Architecture Diagram
+
+```text
++----------------+
+|  Application   |
++----------------+
+         |
+         v
++----------------+
+| SQLite Library |
++----------------+
+         |
+         v
++----------------+
+| Database File  |
++----------------+
+```
+
+## Page-Based Storage
+
+SQLite organizes data into fixed-size pages.
+
+Typical page size:
+
+```text
+4096 bytes (4 KB)
+```
+
+Pages contain:
+
+* Table records
+* Index entries
+* Metadata
+
+This design allows efficient reading and writing of data.
+
+## Transaction Management
+
+SQLite supports ACID transactions.
+
+A transaction ensures that multiple operations either:
+
+* Complete successfully together
+* Or fail together
+
+Example:
+
+```sql
+BEGIN TRANSACTION;
+
+UPDATE accounts
+SET balance = balance - 100
+WHERE id = 1;
+
+UPDATE accounts
+SET balance = balance + 100
+WHERE id = 2;
+
+COMMIT;
+```
+
+## Locking and Concurrency
+
+SQLite uses file locking to manage concurrent access.
+
+Modes include:
+
+* Shared Lock
+* Reserved Lock
+* Pending Lock
+* Exclusive Lock
+
+Multiple users can read simultaneously, but write operations are serialized.
+
+## Advantages of SQLite Architecture
+
+* No database server
+* Easy deployment
+* Minimal configuration
+* Portable database files
+* Small memory footprint
+
+## Limitations
+
+* Less suitable for very high write workloads
+* Limited concurrent writers
+* Not designed for large distributed systems
+
+## Summary
+
+SQLite uses an embedded architecture where the database engine runs inside the application itself. This eliminates the need for a separate server, making SQLite fast, portable, and easy to deploy.
+
+## Next Steps
+
+Continue to **SQLite CLI** to learn how to interact with SQLite databases from the command line.

@@ -1,0 +1,62 @@
+---
+title: "Inserting Data"
+---
+
+The `INSERT` statement adds new rows to a table.
+
+## Insert a Single Row
+
+```sql
+INSERT INTO users (name, email)
+VALUES ('Alice', 'alice@example.com');
+```
+
+## Insert Multiple Rows
+
+```sql
+INSERT INTO users (name, email)
+VALUES
+  ('Alice', 'alice@example.com'),
+  ('Bob', 'bob@example.com'),
+  ('Charlie', 'charlie@example.com');
+```
+
+## Insert Into All Columns
+
+If you provide values for every column in the correct order, you can omit the column list.
+
+```sql
+INSERT INTO users
+VALUES (1, 'Alice', 'alice@example.com');
+```
+
+## Insert Data From Another Table
+
+```sql
+INSERT INTO archived_users (name, email)
+SELECT name, email
+FROM users
+WHERE active = 0;
+```
+
+## Common Errors
+
+### Column Count Mismatch
+
+```sql
+INSERT INTO users (name, email)
+VALUES ('Alice');
+```
+
+The number of values must match the number of columns specified.
+
+### Missing Required Values
+
+If a column is defined with `NOT NULL` and no default value, SQLite will reject rows that omit that column.
+
+## Summary
+
+- Use `INSERT INTO` to add rows.
+- Specify column names whenever possible.
+- Multiple rows can be inserted with a single statement.
+- `INSERT ... SELECT` copies data from another query.

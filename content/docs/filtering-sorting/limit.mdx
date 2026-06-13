@@ -1,0 +1,81 @@
+---
+title: "LIMIT"
+---
+
+The `LIMIT` clause restricts the number of rows returned by a query.
+
+## Syntax
+
+```sql
+SELECT column1, column2
+FROM table_name
+LIMIT number;
+```
+
+## Basic Example
+
+Return only the first five rows:
+
+```sql
+SELECT *
+FROM products
+LIMIT 5;
+```
+
+## Using LIMIT with ORDER BY
+
+This is a common pattern for finding top or bottom results.
+
+```sql
+SELECT *
+FROM products
+ORDER BY price DESC
+LIMIT 10;
+```
+
+Return the ten most expensive products.
+
+## OFFSET
+
+Skip a number of rows before returning results.
+
+```sql
+SELECT *
+FROM products
+LIMIT 10 OFFSET 20;
+```
+
+This skips the first twenty rows and returns the next ten.
+
+## Pagination Example
+
+Page 1:
+
+```sql
+SELECT *
+FROM products
+LIMIT 10 OFFSET 0;
+```
+
+Page 2:
+
+```sql
+SELECT *
+FROM products
+LIMIT 10 OFFSET 10;
+```
+
+Page 3:
+
+```sql
+SELECT *
+FROM products
+LIMIT 10 OFFSET 20;
+```
+
+## Key Points
+
+- `LIMIT` restricts the number of returned rows.
+- `OFFSET` skips rows before returning results.
+- `LIMIT` is commonly used with `ORDER BY`.
+- Useful for pagination and previewing data.

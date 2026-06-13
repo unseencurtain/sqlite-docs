@@ -1,0 +1,83 @@
+---
+title: "Primary Key"
+---
+
+A **PRIMARY KEY** uniquely identifies each row in a table.
+
+Every table should have a way to uniquely identify its records. A primary key ensures that no two rows have the same value and that the value is never `NULL`.
+
+## Creating a Primary Key
+
+A primary key can be defined when creating a table:
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username TEXT
+);
+```
+
+In this example:
+
+- `id` uniquely identifies each row.
+- Duplicate values are not allowed.
+- `NULL` values are not allowed.
+
+## Composite Primary Keys
+
+A primary key can consist of multiple columns.
+
+```sql
+CREATE TABLE enrollments (
+    student_id INTEGER,
+    course_id INTEGER,
+    PRIMARY KEY (student_id, course_id)
+);
+```
+
+The combination of `student_id` and `course_id` must be unique.
+
+## How SQLite Treats Primary Keys
+
+When a column is declared as:
+
+```sql
+id INTEGER PRIMARY KEY
+```
+
+SQLite treats that column as the table's row identifier.
+
+```sql
+INSERT INTO users (username)
+VALUES ('alice');
+```
+
+SQLite automatically generates the primary key value if one is not provided.
+
+## Attempting Duplicate Values
+
+```sql
+INSERT INTO users (id, username)
+VALUES (1, 'alice');
+
+INSERT INTO users (id, username)
+VALUES (1, 'bob');
+```
+
+The second statement fails because the primary key value already exists.
+
+## Viewing Primary Key Information
+
+```sql
+PRAGMA table_info(users);
+```
+
+This displays information about the table's columns, including which column is part of the primary key.
+
+## Summary
+
+- A primary key uniquely identifies each row.
+- Primary key values must be unique.
+- Primary key values cannot be `NULL`.
+- A primary key can consist of one or more columns.
+- `INTEGER PRIMARY KEY` has special behavior in SQLite.

@@ -1,0 +1,10 @@
+{
+  "title": "Filtering & Sorting",
+  "pages": [
+    "where",
+    "comparison-operators",
+    "logical-operators",
+    "order-by",
+    "limit"
+  ]
+}

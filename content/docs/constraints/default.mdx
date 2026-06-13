@@ -1,0 +1,60 @@
+---
+title: "DEFAULT"
+---
+
+The **DEFAULT** constraint provides a value when none is supplied during an insert.
+
+This helps ensure consistent data without requiring every value to be specified.
+
+## Creating a DEFAULT Constraint
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    status TEXT DEFAULT 'active'
+);
+```
+
+If no value is provided for `status`, SQLite uses `'active'`.
+
+## Using the Default Value
+
+```sql
+INSERT INTO users DEFAULT VALUES;
+```
+
+The row receives the default value.
+
+## Explicitly Providing a Value
+
+```sql
+INSERT INTO users (status)
+VALUES ('inactive');
+```
+
+The provided value is used instead of the default.
+
+## Numeric Defaults
+
+```sql
+CREATE TABLE products (
+    stock INTEGER DEFAULT 0
+);
+```
+
+## Date and Time Defaults
+
+```sql
+CREATE TABLE logs (
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+SQLite inserts the current timestamp automatically.
+
+## Summary
+
+- `DEFAULT` supplies a value when one is not provided.
+- Works with text, numbers, and expressions.
+- Reduces repetitive insert statements.
+- Explicit values override the default.

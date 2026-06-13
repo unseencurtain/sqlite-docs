@@ -1,0 +1,183 @@
+---
+title: "Type Affinity"
+---
+
+SQLite uses a flexible type system.
+
+Instead of enforcing a strict data type for each column, SQLite assigns a **type affinity** to a column. The affinity is a recommendation for how values should be stored.
+
+## What Is Type Affinity?
+
+A column's type affinity influences how SQLite attempts to convert values before storing them.
+
+```sql
+CREATE TABLE products (
+  price NUMERIC
+);
+```
+
+When a value is inserted, SQLite may convert it to a more appropriate storage class based on the column's affinity.
+
+## The Five Affinity Types
+
+SQLite recognizes five affinity categories:
+
+| Affinity | Description |
+|----------|-------------|
+| INTEGER | Prefers integer values. |
+| TEXT | Prefers text values. |
+| REAL | Prefers floating-point values. |
+| NUMERIC | Converts values to INTEGER or REAL when possible. |
+| BLOB | No preferred conversion. |
+
+## INTEGER Affinity
+
+```sql
+CREATE TABLE users (
+  id INTEGER
+);
+```
+
+Example:
+
+```sql
+INSERT INTO users (id)
+VALUES ('123');
+```
+
+SQLite attempts to store the value as an INTEGER.
+
+## TEXT Affinity
+
+```sql
+CREATE TABLE users (
+  name TEXT
+);
+```
+
+Example:
+
+```sql
+INSERT INTO users (name)
+VALUES (100);
+```
+
+SQLite may convert the value to text.
+
+## REAL Affinity
+
+```sql
+CREATE TABLE measurements (
+  value REAL
+);
+```
+
+Example:
+
+```sql
+INSERT INTO measurements (value)
+VALUES ('3.14');
+```
+
+SQLite attempts to store the value as a REAL.
+
+## NUMERIC Affinity
+
+NUMERIC affinity tries to preserve numeric values whenever possible.
+
+```sql
+CREATE TABLE settings (
+  value NUMERIC
+);
+```
+
+Examples:
+
+```sql
+INSERT INTO settings (value)
+VALUES ('100');
+```
+
+```sql
+INSERT INTO settings (value)
+VALUES ('3.14');
+```
+
+The first value may become INTEGER.
+
+The second value may become REAL.
+
+## BLOB Affinity
+
+BLOB affinity performs no preferred conversion.
+
+```sql
+CREATE TABLE files (
+  data BLOB
+);
+```
+
+Values are stored as supplied whenever possible.
+
+## How SQLite Determines Affinity
+
+SQLite derives affinity from the declared column type.
+
+Examples:
+
+```sql
+CREATE TABLE example (
+  a INTEGER,
+  b TEXT,
+  c REAL,
+  d NUMERIC,
+  e BLOB
+);
+```
+
+## Affinity Does Not Enforce Types
+
+SQLite generally allows values that do not match the column's affinity.
+
+```sql
+CREATE TABLE demo (
+  age INTEGER
+);
+
+INSERT INTO demo (age)
+VALUES ('hello');
+```
+
+The insert may succeed even though the value is not an integer.
+
+This behavior is one of SQLite's defining characteristics.
+
+## Viewing Stored Types
+
+Use `typeof()` to inspect how SQLite stored a value.
+
+```sql
+SELECT typeof('123');
+```
+
+```sql
+SELECT typeof(123);
+```
+
+```sql
+SELECT typeof(3.14);
+```
+
+## Summary
+
+Type affinity is SQLite's mechanism for guiding type conversion.
+
+The five affinities are:
+
+- INTEGER
+- TEXT
+- REAL
+- NUMERIC
+- BLOB
+
+Affinity influences storage behavior but does not strictly enforce column types.

@@ -1,0 +1,75 @@
+---
+title: "ORDER BY"
+---
+
+The `ORDER BY` clause sorts query results.
+
+By default, SQLite sorts in ascending order.
+
+## Syntax
+
+```sql
+SELECT column1, column2
+FROM table_name
+ORDER BY column_name;
+```
+
+## Ascending Order
+
+```sql
+SELECT *
+FROM products
+ORDER BY price ASC;
+```
+
+`ASC` is optional because ascending order is the default.
+
+```sql
+SELECT *
+FROM products
+ORDER BY price;
+```
+
+## Descending Order
+
+```sql
+SELECT *
+FROM products
+ORDER BY price DESC;
+```
+
+## Sorting by Multiple Columns
+
+```sql
+SELECT *
+FROM employees
+ORDER BY department ASC, salary DESC;
+```
+
+Rows are first sorted by department. Rows with the same department are then sorted by salary.
+
+## Sorting by Expressions
+
+```sql
+SELECT name, price * quantity AS total
+FROM orders
+ORDER BY total DESC;
+```
+
+## Handling NULL Values
+
+SQLite generally places `NULL` values before non-NULL values when sorting in ascending order.
+
+```sql
+SELECT *
+FROM customers
+ORDER BY email;
+```
+
+## Key Points
+
+- `ORDER BY` sorts query results.
+- `ASC` sorts ascending.
+- `DESC` sorts descending.
+- Multiple columns can be used for sorting.
+- Sorting happens after filtering.

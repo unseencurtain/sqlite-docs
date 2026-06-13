@@ -1,0 +1,56 @@
+---
+title: "MIN"
+---
+
+The `MIN()` function returns the smallest value in a set.
+
+## Syntax
+
+```sql
+MIN(expression)
+```
+
+## Example
+
+```sql
+SELECT MIN(amount)
+FROM orders;
+```
+
+Result:
+
+| MIN(amount) |
+|------------|
+| 25 |
+
+## Using MIN with GROUP BY
+
+```sql
+SELECT customer, MIN(amount) AS smallest_order
+FROM orders
+GROUP BY customer;
+```
+
+Result:
+
+| customer | smallest_order |
+|----------|---------------|
+| Alice | 75 |
+| Bob | 25 |
+
+## MIN with Text Values
+
+`MIN()` can also be used with text values.
+
+```sql
+SELECT MIN(name)
+FROM users;
+```
+
+The alphabetically smallest value is returned.
+
+## Notes
+
+- Works with numbers, text, and dates.
+- Ignores `NULL` values.
+- Often used with `GROUP BY`.

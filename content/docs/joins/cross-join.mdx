@@ -1,0 +1,80 @@
+---
+title: "CROSS JOIN"
+---
+
+`CROSS JOIN` returns every possible combination of rows from two tables.
+
+This is also known as a Cartesian product.
+
+## Syntax
+
+```sql
+SELECT columns
+FROM table1
+CROSS JOIN table2;
+```
+
+## Example Tables
+
+### colors
+
+| color |
+|--------|
+| Red |
+| Blue |
+
+### sizes
+
+| size |
+|------|
+| Small |
+| Large |
+
+## Example Query
+
+```sql
+SELECT
+    colors.color,
+    sizes.size
+FROM colors
+CROSS JOIN sizes;
+```
+
+## Result
+
+| color | size |
+|--------|------|
+| Red | Small |
+| Red | Large |
+| Blue | Small |
+| Blue | Large |
+
+Each row from the first table is combined with every row from the second table.
+
+## Row Count
+
+The number of rows returned is:
+
+```text
+rows_in_table1 × rows_in_table2
+```
+
+For example:
+
+```text
+10 rows × 5 rows = 50 rows
+```
+
+## Practical Uses
+
+- Generating combinations.
+- Creating test data.
+- Producing reports with all possible values.
+- Building calendars and schedules.
+
+## Summary
+
+- Produces all possible row combinations.
+- Does not require an `ON` clause.
+- Can generate very large result sets.
+- Should be used carefully with large tables.

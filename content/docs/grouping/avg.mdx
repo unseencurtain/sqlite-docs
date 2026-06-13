@@ -1,0 +1,58 @@
+---
+title: "AVG"
+---
+
+The `AVG()` function returns the average value of a set of numbers.
+
+## Syntax
+
+```sql
+AVG(expression)
+```
+
+## Example
+
+```sql
+SELECT AVG(amount)
+FROM orders;
+```
+
+Result:
+
+| AVG(amount) |
+|------------|
+| 62.5 |
+
+The average is calculated by dividing the total by the number of non-NULL values.
+
+## Using AVG with GROUP BY
+
+```sql
+SELECT customer, AVG(amount) AS average_order
+FROM orders
+GROUP BY customer;
+```
+
+Result:
+
+| customer | average_order |
+|----------|--------------|
+| Alice | 87.5 |
+| Bob | 37.5 |
+
+## AVG and NULL Values
+
+`NULL` values are ignored.
+
+```sql
+SELECT AVG(score)
+FROM results;
+```
+
+Only non-NULL values are included in the calculation.
+
+## Notes
+
+- `AVG()` ignores `NULL` values.
+- Returns a numeric average.
+- Frequently combined with `GROUP BY`.

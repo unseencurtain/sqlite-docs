@@ -1,0 +1,128 @@
+---
+title: "Creating Tables"
+---
+
+Tables are the primary structure used to store data in SQLite. A table consists of columns, where each column defines a particular type of information.
+
+## Basic Syntax
+
+```sql
+CREATE TABLE table_name (
+    column_name data_type
+);
+```
+
+## Creating a Simple Table
+
+```sql
+CREATE TABLE users (
+    id INTEGER,
+    username TEXT,
+    email TEXT
+);
+```
+
+## Creating a Table with Constraints
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username TEXT NOT NULL,
+    email TEXT UNIQUE,
+    created_at TEXT
+);
+```
+
+## Common Constraints
+
+### PRIMARY KEY
+
+Identifies each row uniquely.
+
+```sql
+CREATE TABLE products (
+    id INTEGER PRIMARY KEY,
+    name TEXT
+);
+```
+
+### NOT NULL
+
+Prevents a column from storing `NULL`.
+
+```sql
+CREATE TABLE users (
+    username TEXT NOT NULL
+);
+```
+
+### UNIQUE
+
+Ensures values are not duplicated.
+
+```sql
+CREATE TABLE users (
+    email TEXT UNIQUE
+);
+```
+
+### DEFAULT
+
+Provides a value when none is supplied.
+
+```sql
+CREATE TABLE tasks (
+    completed INTEGER DEFAULT 0
+);
+```
+
+### CHECK
+
+Validates data before insertion.
+
+```sql
+CREATE TABLE products (
+    price REAL CHECK (price >= 0)
+);
+```
+
+## Foreign Keys
+
+Foreign keys create relationships between tables.
+
+```sql
+CREATE TABLE departments (
+    id INTEGER PRIMARY KEY,
+    name TEXT
+);
+
+CREATE TABLE employees (
+    id INTEGER PRIMARY KEY,
+    department_id INTEGER,
+    FOREIGN KEY (department_id)
+        REFERENCES departments(id)
+);
+```
+
+## Creating a Table Only If It Does Not Exist
+
+```sql
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
+    username TEXT
+);
+```
+
+## Viewing Table Definitions
+
+To see how a table was created:
+
+```sql
+.schema users
+```
+
+## Next Steps
+
+- Alter existing tables
+- Remove tables
+- Design tables efficiently

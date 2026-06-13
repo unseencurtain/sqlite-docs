@@ -1,0 +1,63 @@
+---
+title: "CHECK"
+---
+
+The **CHECK** constraint validates data before it is stored.
+
+A row is inserted or updated only if the condition evaluates to true.
+
+## Creating a CHECK Constraint
+
+```sql
+CREATE TABLE products (
+    id INTEGER PRIMARY KEY,
+    price REAL CHECK (price >= 0)
+);
+```
+
+Prices cannot be negative.
+
+## Valid Insert
+
+```sql
+INSERT INTO products (price)
+VALUES (10.99);
+```
+
+## Invalid Insert
+
+```sql
+INSERT INTO products (price)
+VALUES (-5);
+```
+
+This fails because the condition is not satisfied.
+
+## Multiple Conditions
+
+```sql
+CREATE TABLE users (
+    age INTEGER CHECK (age >= 18 AND age <= 120)
+);
+```
+
+Only values within the specified range are allowed.
+
+## Table-Level CHECK Constraints
+
+```sql
+CREATE TABLE employees (
+    salary REAL,
+    bonus REAL,
+    CHECK (bonus <= salary)
+);
+```
+
+The condition can reference multiple columns.
+
+## Summary
+
+- `CHECK` enforces custom validation rules.
+- Invalid data is rejected.
+- Conditions can use one or more columns.
+- Useful for business rules and data integrity.

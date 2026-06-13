@@ -1,0 +1,9 @@
+{
+  "title": "Tables",
+  "pages": [
+    "create-table",
+    "alter-table",
+    "drop-table",
+    "table-design-best-practices"
+  ]
+}

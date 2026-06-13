@@ -1,0 +1,198 @@
+---
+title: "NULL Values"
+---
+
+A NULL value represents missing, unknown, or undefined data.
+
+NULL is not the same as zero, an empty string, or `FALSE`.
+
+## What Is NULL?
+
+Examples:
+
+```sql
+SELECT NULL;
+```
+
+A NULL value indicates that no value is present.
+
+## Inserting NULL Values
+
+You can explicitly insert NULL.
+
+```sql
+INSERT INTO users (name)
+VALUES (NULL);
+```
+
+Example table:
+
+```sql
+CREATE TABLE users (
+  id INTEGER,
+  name TEXT
+);
+```
+
+## NULL and Comparisons
+
+Comparisons involving NULL behave differently from ordinary values.
+
+### Incorrect
+
+```sql
+SELECT NULL = NULL;
+```
+
+Result:
+
+```text
+NULL
+```
+
+### Incorrect
+
+```sql
+SELECT NULL <> NULL;
+```
+
+Result:
+
+```text
+NULL
+```
+
+Neither expression evaluates to true.
+
+## IS NULL
+
+Use `IS NULL` to test for NULL values.
+
+```sql
+SELECT *
+FROM users
+WHERE name IS NULL;
+```
+
+## IS NOT NULL
+
+Use `IS NOT NULL` to find rows containing a value.
+
+```sql
+SELECT *
+FROM users
+WHERE name IS NOT NULL;
+```
+
+## NULL in Expressions
+
+Arithmetic involving NULL usually returns NULL.
+
+```sql
+SELECT 5 + NULL;
+```
+
+Result:
+
+```text
+NULL
+```
+
+```sql
+SELECT NULL * 10;
+```
+
+Result:
+
+```text
+NULL
+```
+
+## NULL and Aggregate Functions
+
+Most aggregate functions ignore NULL values.
+
+Example data:
+
+```sql
+CREATE TABLE scores (
+  score INTEGER
+);
+```
+
+```sql
+INSERT INTO scores (score)
+VALUES (10), (20), (NULL);
+```
+
+Average:
+
+```sql
+SELECT AVG(score)
+FROM scores;
+```
+
+The NULL value is ignored.
+
+## COUNT(*)
+
+`COUNT(*)` counts all rows.
+
+```sql
+SELECT COUNT(*)
+FROM scores;
+```
+
+## COUNT(column)
+
+`COUNT(column)` counts only non-NULL values.
+
+```sql
+SELECT COUNT(score)
+FROM scores;
+```
+
+## Replacing NULL Values
+
+Use `COALESCE()` to replace NULL values.
+
+```sql
+SELECT COALESCE(NULL, 'Unknown');
+```
+
+Result:
+
+```text
+Unknown
+```
+
+Example:
+
+```sql
+SELECT COALESCE(name, 'Anonymous')
+FROM users;
+```
+
+## Sorting NULL Values
+
+NULL values can appear in sorted results.
+
+```sql
+SELECT *
+FROM users
+ORDER BY name;
+```
+
+Their position depends on the sort order and query options.
+
+## Summary
+
+NULL represents missing or unknown data.
+
+Important rules:
+
+- NULL is not equal to any value, including another NULL.
+- Use `IS NULL` and `IS NOT NULL` for NULL checks.
+- Many aggregate functions ignore NULL values.
+- `COALESCE()` can provide replacement values.
+- Arithmetic involving NULL usually returns NULL.

@@ -1,0 +1,63 @@
+---
+title: "NOT NULL"
+---
+
+The **NOT NULL** constraint prevents a column from storing `NULL` values.
+
+Use this constraint when a value is required for every row.
+
+## Creating a NOT NULL Column
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username TEXT NOT NULL
+);
+```
+
+The `username` column must always contain a value.
+
+## Valid Insert
+
+```sql
+INSERT INTO users (username)
+VALUES ('alice');
+```
+
+This succeeds because a value is provided.
+
+## Invalid Insert
+
+```sql
+INSERT INTO users (username)
+VALUES (NULL);
+```
+
+This fails because the column does not allow `NULL`.
+
+## Omitting a Required Column
+
+```sql
+INSERT INTO users DEFAULT VALUES;
+```
+
+This also fails if SQLite would need to store `NULL` in the column.
+
+## Multiple NOT NULL Columns
+
+```sql
+CREATE TABLE products (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    price REAL NOT NULL
+);
+```
+
+Both columns must contain values.
+
+## Summary
+
+- `NOT NULL` prevents `NULL` values.
+- Useful for required data.
+- Can be applied to any column type.
+- Inserts or updates that produce `NULL` will fail.

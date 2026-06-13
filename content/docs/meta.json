@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "index",
+    "sqlite-architecture",
+    "sqlite-cli",
+    "database-basics",
+    "tables",
+    "data-types",
+    "crud",
+    "filtering-sorting",
+    "functions",
+    "constraints",
+    "relationships",
+    "joins",
+    "grouping",
+    "indexes",
+    "views",
+    "transactions",
+    "triggers",
+    "advanced",
+    "reference"
+  ]
+}

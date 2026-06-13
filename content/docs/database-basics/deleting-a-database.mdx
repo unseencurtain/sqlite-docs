@@ -1,0 +1,87 @@
+---
+title: "Deleting a Database"
+---
+
+Deleting a SQLite database means permanently removing the database file from storage.
+
+Because SQLite stores the entire database inside a file, deleting that file removes:
+
+* Tables
+* Data
+* Indexes
+* Views
+* Triggers
+
+## Removing Data Without Deleting the Database
+
+If you only want to remove records, use SQL statements instead of deleting the database.
+
+### Delete Rows
+
+```sql
+DELETE FROM users;
+```
+
+### Remove a Table
+
+```sql
+DROP TABLE users;
+```
+
+### Remove a View
+
+```sql
+DROP VIEW active_users;
+```
+
+### Remove an Index
+
+```sql
+DROP INDEX idx_users_username;
+```
+
+These statements preserve the database file while removing specific objects.
+
+## Deleting All Database Objects
+
+You can remove all tables manually:
+
+```sql
+DROP TABLE users;
+DROP TABLE orders;
+DROP TABLE products;
+```
+
+After all objects are removed, the database file still exists but contains no useful data.
+
+## Permanent Database Removal
+
+To completely delete a database, remove its database file from the filesystem.
+
+Before doing so:
+
+1. Ensure the database is not in use.
+2. Verify backups exist if needed.
+3. Confirm the correct file is being removed.
+
+Once deleted, recovery may not be possible.
+
+## Verifying Deletion
+
+If a database file is removed and a new empty database is later created with the same name, queries such as:
+
+```sql
+SELECT name
+FROM sqlite_master;
+```
+
+will return no user-created objects.
+
+## Summary
+
+There are two different ways to remove information in SQLite:
+
+* Delete database objects with SQL (`DELETE`, `DROP TABLE`, `DROP VIEW`, `DROP INDEX`)
+* Delete the database file itself to permanently remove the entire database
+
+Choose the approach that matches your goal.

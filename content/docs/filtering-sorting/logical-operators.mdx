@@ -1,0 +1,71 @@
+---
+title: "Logical Operators"
+---
+
+
+Logical operators combine multiple conditions in a query.
+
+## AND
+
+All conditions must be true.
+
+```sql
+SELECT *
+FROM products
+WHERE category = 'Books'
+  AND price < 50;
+```
+
+## OR
+
+At least one condition must be true.
+
+```sql
+SELECT *
+FROM products
+WHERE category = 'Books'
+   OR category = 'Magazine';
+```
+
+## NOT
+
+Reverses a condition.
+
+```sql
+SELECT *
+FROM products
+WHERE NOT category = 'Books';
+```
+
+## Combining Operators
+
+```sql
+SELECT *
+FROM customers
+WHERE country = 'Bangladesh'
+  AND (status = 'Active' OR status = 'Premium');
+```
+
+## Operator Precedence
+
+SQLite evaluates conditions in this order:
+
+1. `NOT`
+2. `AND`
+3. `OR`
+
+Use parentheses when you need explicit grouping.
+
+```sql
+SELECT *
+FROM customers
+WHERE (country = 'Bangladesh' OR country = 'India')
+  AND active = 1;
+```
+
+## Key Points
+
+- `AND` requires every condition to be true.
+- `OR` requires at least one condition to be true.
+- `NOT` negates a condition.
+- Parentheses improve readability and control evaluation order.

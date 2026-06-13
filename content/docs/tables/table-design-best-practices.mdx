@@ -1,0 +1,162 @@
+---
+title: "Table Design Best Practices"
+---
+
+
+Well-designed tables are easier to maintain, query, and extend as your database grows.
+
+## Give Tables Clear Names
+
+Use descriptive names that represent the data being stored.
+
+Good:
+
+```text
+users
+products
+orders
+```
+
+Less clear:
+
+```text
+data
+table1
+items2
+```
+
+## Use a Primary Key
+
+Most tables should have a primary key.
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username TEXT
+);
+```
+
+A primary key uniquely identifies each row.
+
+## Store One Type of Data Per Column
+
+Avoid combining multiple values in a single column.
+
+Less ideal:
+
+```text
+"red,blue,green"
+```
+
+Better:
+
+```text
+red
+blue
+green
+```
+
+stored in separate rows when appropriate.
+
+## Use Appropriate Data Types
+
+Choose data types that match the stored information.
+
+Common SQLite types:
+
+| Type | Purpose |
+|--------|---------|
+| INTEGER | Whole numbers |
+| REAL | Decimal numbers |
+| TEXT | Strings |
+| BLOB | Binary data |
+| NULL | Missing values |
+
+## Avoid Duplicate Data
+
+Instead of repeating information across many rows, use related tables.
+
+Less ideal:
+
+```text
+employee_name
+department_name
+manager_name
+```
+
+Better:
+
+```text
+employees
+departments
+```
+
+connected with foreign keys.
+
+## Use Constraints
+
+Constraints improve data quality.
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username TEXT NOT NULL,
+    email TEXT UNIQUE
+);
+```
+
+Useful constraints include:
+
+- PRIMARY KEY
+- NOT NULL
+- UNIQUE
+- CHECK
+- DEFAULT
+- FOREIGN KEY
+
+## Keep Tables Focused
+
+Each table should represent a single concept.
+
+Examples:
+
+- `users`
+- `products`
+- `orders`
+
+Avoid tables that mix unrelated information.
+
+## Plan for Future Growth
+
+Consider how the schema might evolve:
+
+- Will new columns be needed?
+- Will relationships be added?
+- Will data volume increase?
+
+A flexible design reduces future migration work.
+
+## Document Relationships
+
+Use foreign keys to make relationships explicit.
+
+```sql
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY,
+    customer_id INTEGER,
+    FOREIGN KEY (customer_id)
+        REFERENCES customers(id)
+);
+```
+
+## Review Before Production
+
+Before deploying a schema:
+
+- Verify table names.
+- Verify constraints.
+- Check relationships.
+- Remove unnecessary columns.
+- Ensure indexes exist where needed.
+
+Good table design reduces errors, improves query performance, and makes databases easier to maintain.

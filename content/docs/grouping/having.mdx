@@ -1,0 +1,76 @@
+---
+title: "HAVING"
+---
+
+# HAVING
+
+The `HAVING` clause filters groups created by `GROUP BY`.
+
+While `WHERE` filters individual rows before grouping, `HAVING` filters groups after aggregation.
+
+## Syntax
+
+```sql
+SELECT column1, aggregate_function(column2)
+FROM table_name
+GROUP BY column1
+HAVING condition;
+```
+
+## Example
+
+```sql
+SELECT customer, SUM(amount) AS total_amount
+FROM orders
+GROUP BY customer
+HAVING SUM(amount) > 100;
+```
+
+Result:
+
+| customer | total_amount |
+|----------|-------------|
+| Alice | 175 |
+
+Only groups whose total amount exceeds `100` are returned.
+
+## WHERE vs HAVING
+
+### Using WHERE
+
+```sql
+SELECT *
+FROM orders
+WHERE amount > 50;
+```
+
+Filters rows before grouping.
+
+### Using HAVING
+
+```sql
+SELECT customer, SUM(amount)
+FROM orders
+GROUP BY customer
+HAVING SUM(amount) > 100;
+```
+
+Filters groups after aggregation.
+
+## HAVING Without GROUP BY
+
+SQLite allows `HAVING` without a `GROUP BY` clause.
+
+```sql
+SELECT COUNT(*) AS total_orders
+FROM orders
+HAVING COUNT(*) > 0;
+```
+
+The entire result set is treated as a single group.
+
+## Notes
+
+- `HAVING` is most commonly used with aggregate functions.
+- `WHERE` filters rows.
+- `HAVING` filters groups.

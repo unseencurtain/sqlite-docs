@@ -1,0 +1,140 @@
+---
+title: "Numeric Functions"
+---
+
+Numeric functions perform calculations on numbers.
+
+## ABS()
+
+Returns the absolute value.
+
+```sql
+SELECT ABS(-50);
+```
+
+Result:
+
+```text
+50
+```
+
+## ROUND()
+
+Rounds a number.
+
+Round to the nearest integer:
+
+```sql
+SELECT ROUND(15.7);
+```
+
+Result:
+
+```text
+16
+```
+
+Round to two decimal places:
+
+```sql
+SELECT ROUND(15.6789, 2);
+```
+
+Result:
+
+```text
+15.68
+```
+
+## CEIL()
+
+Returns the smallest integer greater than or equal to a number.
+
+```sql
+SELECT CEIL(10.2);
+```
+
+Result:
+
+```text
+11
+```
+
+## FLOOR()
+
+Returns the largest integer less than or equal to a number.
+
+```sql
+SELECT FLOOR(10.9);
+```
+
+Result:
+
+```text
+10
+```
+
+## RANDOM()
+
+Returns a pseudo-random integer.
+
+```sql
+SELECT RANDOM();
+```
+
+Example result:
+
+```text
+-58421674211893172
+```
+
+## MODULO Operator
+
+Use `%` to find the remainder.
+
+```sql
+SELECT 10 % 3;
+```
+
+Result:
+
+```text
+1
+```
+
+## Arithmetic Operations
+
+Addition:
+
+```sql
+SELECT 10 + 5;
+```
+
+Subtraction:
+
+```sql
+SELECT 10 - 5;
+```
+
+Multiplication:
+
+```sql
+SELECT 10 * 5;
+```
+
+Division:
+
+```sql
+SELECT 10 / 5;
+```
+
+## Summary
+
+| Function | Description |
+|----------|-------------|
+| `ABS()` | Absolute value |
+| `ROUND()` | Rounds a number |
+| `CEIL()` | Rounds up |
+| `FLOOR()` | Rounds down |
+| `RANDOM()` | Generates a random integer |
+| `%` | Returns remainder |

@@ -1,0 +1,108 @@
+---
+title: "Comparison Operators"
+---
+
+
+Comparison operators are used to compare values within a `WHERE` clause.
+
+## Equal To
+
+```sql
+SELECT *
+FROM products
+WHERE category = 'Books';
+```
+
+## Not Equal To
+
+SQLite supports both `!=` and `<>`.
+
+```sql
+SELECT *
+FROM products
+WHERE category != 'Books';
+```
+
+```sql
+SELECT *
+FROM products
+WHERE category <> 'Books';
+```
+
+## Greater Than
+
+```sql
+SELECT *
+FROM products
+WHERE price > 100;
+```
+
+## Less Than
+
+```sql
+SELECT *
+FROM products
+WHERE price < 100;
+```
+
+## Greater Than or Equal To
+
+```sql
+SELECT *
+FROM products
+WHERE price >= 100;
+```
+
+## Less Than or Equal To
+
+```sql
+SELECT *
+FROM products
+WHERE price <= 100;
+```
+
+## BETWEEN
+
+Check whether a value falls within a range.
+
+```sql
+SELECT *
+FROM products
+WHERE price BETWEEN 50 AND 100;
+```
+
+## IN
+
+Match one of several values.
+
+```sql
+SELECT *
+FROM customers
+WHERE country IN ('Bangladesh', 'India', 'Nepal');
+```
+
+## LIKE
+
+Match text patterns.
+
+```sql
+SELECT *
+FROM customers
+WHERE name LIKE 'A%';
+```
+
+## Key Points
+
+
+| Operator | Description |
+|----------|-------------|
+| `=` | Equal to |
+| `!=` | Not equal to |
+| `<>` | Not equal to |
+| `>` | Greater than |
+| `<` | Less than |
+| `>=` | Greater than or equal to |
+| `<=` | Less than or equal to |
+| `BETWEEN` | Within a range |
+| `IN` | Match any value in a list |
+| `LIKE` | Pattern matching |

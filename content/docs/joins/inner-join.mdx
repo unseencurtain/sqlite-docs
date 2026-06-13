@@ -1,0 +1,87 @@
+---
+title: "INNER JOIN"
+---
+
+
+`INNER JOIN` returns only the rows that have matching values in both tables.
+
+## Syntax
+
+```sql
+SELECT columns
+FROM table1
+INNER JOIN table2
+ON table1.column = table2.column;
+```
+
+## Example Tables
+
+### customers
+
+| customer_id | customer_name |
+|------------|--------------|
+| 1 | Alice |
+| 2 | Bob |
+| 3 | Charlie |
+
+### orders
+
+| order_id | customer_id | product |
+|----------|------------|---------|
+| 101 | 1 | Laptop |
+| 102 | 2 | Mouse |
+| 103 | 4 | Keyboard |
+
+## Example Query
+
+```sql
+SELECT
+    customers.customer_name,
+    orders.product
+FROM customers
+INNER JOIN orders
+ON customers.customer_id = orders.customer_id;
+```
+
+## Result
+
+| customer_name | product |
+|--------------|---------|
+| Alice | Laptop |
+| Bob | Mouse |
+
+Charlie is not included because there is no matching order.
+
+The order with `customer_id = 4` is not included because there is no matching customer.
+
+## Using Table Aliases
+
+```sql
+SELECT
+    c.customer_name,
+    o.product
+FROM customers AS c
+INNER JOIN orders AS o
+ON c.customer_id = o.customer_id;
+```
+
+## Multiple INNER JOINs
+
+```sql
+SELECT
+    customers.customer_name,
+    orders.order_id,
+    products.product_name
+FROM customers
+INNER JOIN orders
+    ON customers.customer_id = orders.customer_id
+INNER JOIN products
+    ON orders.product_id = products.product_id;
+```
+
+## Summary
+
+- Returns only matching rows.
+- Requires a join condition with `ON`.
+- Non-matching rows are excluded.
+- The most commonly used join type.

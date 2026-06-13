@@ -1,0 +1,80 @@
+---
+title: "LEFT JOIN"
+---
+
+
+`LEFT JOIN` returns all rows from the left table and matching rows from the right table.
+
+If no match exists, SQLite returns `NULL` values for the right table columns.
+
+## Syntax
+
+```sql
+SELECT columns
+FROM table1
+LEFT JOIN table2
+ON table1.column = table2.column;
+```
+
+## Example Tables
+
+### customers
+
+| customer_id | customer_name |
+|------------|--------------|
+| 1 | Alice |
+| 2 | Bob |
+| 3 | Charlie |
+
+### orders
+
+| order_id | customer_id | product |
+|----------|------------|---------|
+| 101 | 1 | Laptop |
+| 102 | 2 | Mouse |
+
+## Example Query
+
+```sql
+SELECT
+    customers.customer_name,
+    orders.product
+FROM customers
+LEFT JOIN orders
+ON customers.customer_id = orders.customer_id;
+```
+
+## Result
+
+| customer_name | product |
+|--------------|---------|
+| Alice | Laptop |
+| Bob | Mouse |
+| Charlie | NULL |
+
+Charlie appears even though no matching order exists.
+
+## Finding Rows Without Matches
+
+A common use of `LEFT JOIN` is finding records that do not have related rows.
+
+```sql
+SELECT customers.customer_name
+FROM customers
+LEFT JOIN orders
+ON customers.customer_id = orders.customer_id
+WHERE orders.order_id IS NULL;
+```
+
+## Result
+
+| customer_name |
+|--------------|
+| Charlie |
+
+## Summary
+
+- Returns every row from the left table.
+- Returns matching rows from the right table.
+- Missing matches produce `NULL` values.
+- Useful for finding unmatched records.

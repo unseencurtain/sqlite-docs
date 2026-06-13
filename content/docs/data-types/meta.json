@@ -1,0 +1,4 @@
+{
+  "title": "Data Types",
+  "pages": ["storage-classes", "type-affinity", "null-values"]
+}

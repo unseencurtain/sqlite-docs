@@ -1,0 +1,74 @@
+---
+title: "Dropping Tables"
+---
+
+
+Use `DROP TABLE` to permanently remove a table and all of its data.
+
+## Basic Syntax
+
+```sql
+DROP TABLE table_name;
+```
+
+Example:
+
+```sql
+DROP TABLE users;
+```
+
+Once executed, the table definition and all stored rows are removed.
+
+## Using IF EXISTS
+
+To avoid an error when the table does not exist:
+
+```sql
+DROP TABLE IF EXISTS users;
+```
+
+## Foreign Key Considerations
+
+If foreign key relationships exist, dropping a table may affect related tables.
+
+Example:
+
+```sql
+DROP TABLE departments;
+```
+
+If other tables reference `departments`, verify the impact before removing it.
+
+## Removing Multiple Tables
+
+Each table requires its own statement.
+
+```sql
+DROP TABLE IF EXISTS orders;
+
+DROP TABLE IF EXISTS customers;
+```
+
+## Verify Removal
+
+List remaining tables:
+
+```sql
+.tables
+```
+
+Or inspect the schema:
+
+```sql
+.schema
+```
+
+## When to Use DROP TABLE
+
+Use `DROP TABLE` when:
+
+- A table is no longer needed.
+- Temporary tables should be removed.
+- A schema is being redesigned.
+
+Use caution, as dropped tables cannot be recovered unless a backup exists.

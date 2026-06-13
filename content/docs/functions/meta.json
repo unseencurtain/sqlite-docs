@@ -1,0 +1,9 @@
+{
+  "title": "Built-in Functions",
+  "pages": [
+    "aggregate-functions",
+    "string-functions",
+    "numeric-functions",
+    "date-time-functions"
+  ]
+}

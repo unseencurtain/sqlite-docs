@@ -1,0 +1,140 @@
+---
+title: "String Functions"
+---
+
+SQLite provides functions for working with text values.
+
+## LENGTH()
+
+Returns the number of characters in a string.
+
+```sql
+SELECT LENGTH('SQLite');
+```
+
+Result:
+
+```text
+6
+```
+
+## UPPER()
+
+Converts text to uppercase.
+
+```sql
+SELECT UPPER('hello world');
+```
+
+Result:
+
+```text
+HELLO WORLD
+```
+
+## LOWER()
+
+Converts text to lowercase.
+
+```sql
+SELECT LOWER('HELLO WORLD');
+```
+
+Result:
+
+```text
+hello world
+```
+
+## TRIM()
+
+Removes leading and trailing spaces.
+
+```sql
+SELECT TRIM('   SQLite   ');
+```
+
+Result:
+
+```text
+SQLite
+```
+
+## LTRIM()
+
+Removes leading characters.
+
+```sql
+SELECT LTRIM('000123', '0');
+```
+
+Result:
+
+```text
+123
+```
+
+## RTRIM()
+
+Removes trailing characters.
+
+```sql
+SELECT RTRIM('SQLite!!!', '!');
+```
+
+Result:
+
+```text
+SQLite
+```
+
+## SUBSTR()
+
+Returns part of a string.
+
+```sql
+SELECT SUBSTR('SQLite Database', 1, 6);
+```
+
+Result:
+
+```text
+SQLite
+```
+
+## REPLACE()
+
+Replaces occurrences of text.
+
+```sql
+SELECT REPLACE('I like cats', 'cats', 'dogs');
+```
+
+Result:
+
+```text
+I like dogs
+```
+
+## Concatenation
+
+SQLite uses the `||` operator to join strings.
+
+```sql
+SELECT first_name || ' ' || last_name AS full_name
+FROM users;
+```
+
+## Summary
+
+| Function | Description |
+|----------|-------------|
+| `LENGTH()` | Returns string length |
+| `UPPER()` | Converts to uppercase |
+| `LOWER()` | Converts to lowercase |
+| `TRIM()` | Removes leading and trailing characters |
+| `LTRIM()` | Removes leading characters |
+| `RTRIM()` | Removes trailing characters |
+| `SUBSTR()` | Extracts part of a string |
+| `REPLACE()` | Replaces text |
+| `||` | Concatenates strings |
