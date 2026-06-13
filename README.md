@@ -1,6 +1,12 @@
 # Doc Live at:
 https://unseencurtain.github.io/sqlite-docs/docs
 
+# Little Test to see if it skips deployment?
+```
+git commit -m "Update README.md [skip ci]"
+
+```
+
 # sqlite-fuma
 
 This is a Next.js application generated with
