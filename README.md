@@ -1,3 +1,6 @@
+# Doc Live at:
+https://unseencurtain.github.io/sqlite-docs/docs
+
 # sqlite-fuma
 
 This is a Next.js application generated with
