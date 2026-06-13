@@ -7,6 +7,9 @@ const config = {
   serverExternalPackages: ['@takumi-rs/image-response'],
   output: 'export',
   reactStrictMode: true,
+
+  basePath: '/sqlite-docs',
+  assetPrefix: '/sqlite-docs',
 };
 
 export default withMDX(config);
